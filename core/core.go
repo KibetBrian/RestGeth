@@ -39,19 +39,20 @@ func GetBalance(address string) *big.Float {
 	return balanceInEther
 }
 
-func TranferEther(addr string, amount float64, password string) {
+//This function transfers ethers from wallet to address provided
+func TranferEther(addrTo string, amount float64, password string) {
 	client, ctx := Connect()
 	Key := DecryptKeystore(password, 1)
 
-	addressTo := common.HexToAddress(addr)
+	addressTo := common.HexToAddress(addrTo)
 	addressFrom := Key.PublicAddress
 
 	nonce, err := client.NonceAt(ctx, addressFrom, nil)
 	if err != nil {
-		log.Printf("Failed to get nonce at %v\n address. Err: %v\n", addr, err)
+		log.Printf("Failed to get nonce at %v\n address. Err: %v\n", addressFrom, err)
 	}
 
-	//Convert amount from int to wei
+	//Convert amount from float64 to wei
 	amountInBigFloat := new(big.Float).SetFloat64(amount)
 	amountInWei := utils.EthToWei(amountInBigFloat)
 
