@@ -25,7 +25,7 @@ func GenerateKeyStore(passphrase string) {
 }
 
 //This function decrypts the file to get the addresses
-func DecryptKeystore(passphrase string){
+func DecryptKeystore(passphrase string) string{
 
 	fileInfo, err := ioutil.ReadDir(path)
 	if err != nil{
@@ -46,6 +46,7 @@ func DecryptKeystore(passphrase string){
 	privateKey := key.PrivateKey
 	publicKey := privateKey.PublicKey
 	publicAddress := crypto.PubkeyToAddress(publicKey)
-	log.Println("The public address of decryption key is: ", publicAddress.Hex())
+	log.Println("The public address of the wallet is: ", publicAddress.Hex())
+	return publicAddress.Hex()
 }
 
