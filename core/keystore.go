@@ -24,7 +24,7 @@ func GenerateKeyStore(passphrase string) {
 	log.Println("Generated keystore with addresss:  ",account.Address.Hex())	
 }
 
-//This function descypts the file to get the addresses
+//This function decrypts the file to get the addresses
 func DecryptKeystore(passphrase string){
 
 	fileInfo, err := ioutil.ReadDir(path)
@@ -46,6 +46,6 @@ func DecryptKeystore(passphrase string){
 	privateKey := key.PrivateKey
 	publicKey := privateKey.PublicKey
 	publicAddress := crypto.PubkeyToAddress(publicKey)
-	log.Println("The public address of decripted key is: ", publicAddress.Hex())
+	log.Println("The public address of decryption key is: ", publicAddress.Hex())
 }
 
