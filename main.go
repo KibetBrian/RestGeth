@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 
 	"github.com/KibetBrian/geth/core"
@@ -12,6 +13,11 @@ const (
 
 func main(){
 	utils.ConfigureEnv()
-	balance := core.GetBalance(address)
-	log.Println(balance)
+	
+	wallet := core.CreateWallet()
+	values, err := json.MarshalIndent(wallet, "\t", "\n")
+	if err != nil{
+		panic(err)
+	}
+	log.Println(string(values))
 }
