@@ -2,8 +2,8 @@
 pragma solidity ^0.8.13;
 
 
-contract Election{
-
+contract Another{
+    address admin;
 
     //Candidate data structures
     mapping(address=>Vote[]) public candidates;
@@ -31,6 +31,14 @@ contract Election{
         address addr;
     }
 
+    constructor(){
+        admin = msg.sender;
+    }
+    modifier onlyAdmin(){
+        require(msg.sender==admin, "Only admins are permitted to do this");
+        _;
+    }
+
     function CastVote(address _address) public returns (bool) {
         for (uint i=0; i<candidatesArray.length; i++){
             if (candidatesArray[i].addr==_address){
@@ -44,7 +52,7 @@ contract Election{
         return false;
     }
 
-    function RegisterCandidate(address _address, string memory _name) public returns(bool){
+    function RegisterCandidate(address _address, string memory _name) onlyAdmin public returns(bool){
         candidates[_address].push();
         candidates[_address].pop();
         
@@ -59,7 +67,7 @@ contract Election{
 
 
 
-    function AddVoter (address _address) public returns (bool){
+    function AddVoter (address _address) onlyAdmin public returns (bool){
         voters[_address]=count;
         votersArray.push(Voter(_address));
         count++;
@@ -78,7 +86,7 @@ contract Election{
         return votersArray;
     }
 
-    function TotalNumberOfVoters() public view returns(uint){
+    function TotalNumberOfVoter() public view returns(uint){
         return votersArray.length;
     }
 
