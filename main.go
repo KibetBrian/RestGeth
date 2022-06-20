@@ -14,16 +14,10 @@ const (
 func main() {
 
 	utils.ConfigureEnv()
-	wallet1 := core.DecryptKeystore("password1", 1)
-	wallet2 := core.DecryptKeystore("password2", 2)
-	address1 := utils.PublicAddressToString(wallet1.PublicAddress)
-	address2 := utils.PublicAddressToString(wallet2.PublicAddress)
-	core.TranferEther(address2, 0.5, "password1")
-	balance1 := core.GetBalance(address1)
-	balance2 := core.GetBalance(address2)
-
-	log.Println("Address1: ", address1)
-	log.Println("Address2: ", address2)
+	
+	balance1 := core.GetBalance("c50cd042edf5cf1d31cd5f9f04b499acd7e33a67")
+	balance2 := core.GetBalance("00deb43c56cca15ead73b21847115dc769df767c")
 	log.Println("Balance1: ", balance1)
 	log.Println("Balance2: ", balance2)
+	
 }
