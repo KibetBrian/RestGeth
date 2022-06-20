@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 
-contract Another{
+contract Election{
     address admin;
 
     //Candidate data structures
