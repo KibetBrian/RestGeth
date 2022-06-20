@@ -12,7 +12,6 @@ import (
 )
 
 func main (){
-
 	utils.ConfigureEnv()
 
 	wallet := core.DecryptKeystore(os.Getenv("wallet1passphrase"), 1)
@@ -53,4 +52,5 @@ func main (){
 	log.Println("Contract Address: ",address)
 	log.Println("Contact Transaction: ",transaction)
 	log.Println("Contract Election: ",election)
+
 }

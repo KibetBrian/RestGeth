@@ -21,6 +21,7 @@ func Connect() (*ethclient.Client, context.Context) {
 	if err != nil {
 		log.Fatalf("Error occured while dialing to the network. Err: %v\n", err)
 	}
+	defer client.Close()
 
 	return client, ctx
 }
