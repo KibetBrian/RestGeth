@@ -18,22 +18,11 @@ func main (){
 	
 	client,ctx := core.Connect()
 
-	pubAddres := wallet.PublicAddress
+	nonce := utils.GetPendingNonce(client, ctx, wallet.PublicAddress)
 
-	nonce, err := client.PendingNonceAt(ctx,pubAddres)
-	if err != nil {
-		log.Fatalf("\nFailed to get pedding nonce: Err: %v\n", err)
-	}
+	gasPrice := utils.SuggestGasPrice(client, ctx)
 
-	gasPrice, err := client.SuggestGasPrice(ctx)
-	if err != nil {
-		log.Fatalf("Failed to get gas price: Err: %v\n", err)
-	}
-
-	networkId, err := client.ChainID(ctx)
-	if err != nil {
-		log.Fatalf("Failed to get network ID: Err: %v\n", err)
-	}
+	networkId := utils.GetNetworkId(client, ctx)
 
 	auth, err := bind.NewKeyedTransactorWithChainID(wallet.PrivateKey,networkId)
 	if err != nil {
@@ -52,5 +41,4 @@ func main (){
 	log.Println("Contract Address: ",address)
 	log.Println("Contact Transaction: ",transaction)
 	log.Println("Contract Election: ",election)
-
 }
